@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 2px solid black;
+}
+</style>
+    <style>
+th, td {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+</style>
+
+</head>
+<body>
+<div style="border-style: solid; ">
+
+<table style="font-size: 32px;" width="100%">
+  <tr>
+    <th>{{operator}} - {{station}}</th>
+  </tr>
+</table>
+<!---->
+<br>
+<table style="font-size: 24px;" width="100%">
+  <tr>
+    <th>{{month}}</th>
+    <th>Total Flights: {{count}}</th>
+      </tr>
+</table>
+<!---->
+<!---->
+<br>
+<div class="table-responsive">
+<table style=" border: 1px solid black; border-collapse: collapse; font-size: 16px;" width="100%">
+    <thead>
+                                       <tr>
+                                           <th >Date</th>
+
+                                             <th >FlightNo</th>
+                                            <th >A/CRegister</th>
+                                            <th >STA</th>
+                                            <th >STD</th>
+                                            <th >ATA</th>
+                                            <th >ATD</th>
+
+                                    </tr>
+                                    </thead>
+      {% for row in monthly %}
+                    <tr {% if row.defect != 'NA' %} style="background-color:yellow;" {% endif %}>
+                        <td   >{{row.date}}</td>
+
+                         <td >{{row.fltno}}</td>
+                        <td >{{row.acreg}}</td>
+                        <td >{{row. sta}}</td>
+                        <td >{{row. std}}</td>
+                        <td >{{row. ata}}</td>
+                        <td > {{row. atd}}</td>
+
+
+                    </tr>
+{% endfor %}
+</table>
+</div>
+<!--    -->
+    <br>
+    </div>
+
+</body>
+</html>

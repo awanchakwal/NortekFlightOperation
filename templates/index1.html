@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+
+                <div id="navbarMenuHeroA" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a href="{{ url_for('main.index') }}" class="navbar-item">
+                            Home
+                        </a>
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('main.profile') }}" class="navbar-item">
+                            Profile
+                        </a>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
+                            Login
+                        </a>
+                        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
+                            Sign Up
+                        </a>
+                        {% endif %}
+                        {% if current_user.is_authenticated %}
+                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                            Logout
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+<h1 class="title">
+    Flask Login Example
+</h1>
+
+<h2 class="subtitle">
+    This is Main Page Under Development :)
+</h2>
+{% endblock %}
+
+
+---------------Folder prject name
+               ├── __init__.py # setup your app
+               ├── main.py   # the non-auth routes for your app
+               ├── auth.py   # the auth routes for your app
+               ├── models.py # your user model
+               ├── db.sqlite # your database
+               └── templates
+                    ├── base.html     # contains common layout and links
+                    ├── index.html    # show the home page
+                    ├── login.html    # show the login form
+                    ├── profile.html  # show the profile page
+                    └── signup.html   # show the signup form

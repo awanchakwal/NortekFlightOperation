@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>WorkOrder</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function validateForm() {
+      var inputs = document.getElementsByTagName('input');
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type === 'text' && inputs[i].value.trim() === '') {
+          alert('All text fields must be filled.');
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
+    <style>
+h3 {
+  text-align: right;
+}
+</style>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js"></script>
+<!-- Custom fonts for this template -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='vendor/fontawesome-free/css/all.min.css') }}" >
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/sb-admin-2.min.css') }}" >
+
+    <!-- Custom styles for this page -->
+    <link  rel="stylesheet" href="{{ url_for('static',filename='vendor/datatables/dataTables.bootstrap4.min.css') }}">
+
+<link rel="icon" href="static/favicon1.png" type="image/png" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <style>
+table, th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+</style>
+
+</head>
+<body style="background-color:yellow;" id="page-top">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Nortek</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.index') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+        </li>
+        <li class="nav-item">
+<!--          <a class="nav-link" href="#">Link</a>-->
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-4" style="background-color:DodgerBlue;" >
+<form    action= "#"  method="POST"  >
+    <div class="row">
+      <div class="col">
+        <label  style="color:white;" >TicketNo</label>
+       <input type="text" class="form-control form-control-lg uc-text-smooth" value="{{row.date}}{{row.fltno}}"  name="operator" readonly>
+            </div>
+      <div class="col">
+        <label  style="color:white;">Date</label>
+        <input type="text" class="form-control form-control-lg uc-text-smooth" value="{{row.date}}"  name="station" readonly>
+      </div>
+      <div class="col">
+        <label  style="color:white;">FlightNo</label>
+        <input type="text"  class="form-control form-control-lg"  name="date" value="{{row.fltno}}" readonly>
+      </div>
+    </div>
+<br>
+<div class="row">
+      <div class="col">
+        <label  style="color:white;">Description</label>
+        <input type="text" class="form-control form-control-lg" style="text-transform: uppercase;" name="description" >
+      </div>
+      <div class="col">
+        <label  style="color:white;" >Charges</label>
+        <input type="text" class="form-control form-control-lg" style="text-transform: uppercase;" name="charges" >
+      </div>
+      <div class="col">
+        <label  style="color:white;">GSE </label>
+        <input type="text" class="form-control form-control-lg" style="text-transform: uppercase;" name="gse" >
+      </div>
+    </div>
+
+<br>
+<div class="row">
+      <div class="col">
+        <label  style="color:white;">GSECharges</label>
+        <input type="text" class="form-control form-control-lg" style="text-transform: uppercase;" name="gsecharges" >
+      </div>
+      <div class="col">
+        <label  style="color:white;">Fluid</label>
+        <input type="text" class="form-control form-control-lg" style="text-transform: uppercase;" name="fluid" >
+      </div>
+      <div class="col">
+        <label  style="color:white;">FluidCharges</label>
+        <input type="number" class="form-control form-control-lg" style="text-transform: uppercase;" name="fluidcharges" >
+      </div>
+    </div>
+
+<br>
+
+
+    </div>
+
+<br>
+
+      <div class="col">
+        <label  style="color:white;">Remarks</label>
+          <textarea  class="form-control form-control-lg"  name="remarks" rows="4" cols="50" ></textarea>
+<!--        <input type="text" class="form-control form-control-lg" style="text-transform: uppercase;" name="rectification" value="{{row.rectification}}" readonly>-->
+      </div>
+
+    </div>
+
+  <input type="submit" class="btn btn-warning" value="Add">
+<br><br>
+  </form>
+</div>
+<br>
+<!-- Bootstrap core JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{url_for('static',filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{url_for('static',filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{url_for('static',filename='js/sb-admin-2.min.js') }}"></script>
+
+
+
+    <!-- Page level custom scripts -->
+    <script src="{{url_for('static',filename='js/demo/datatables-demo.js') }}"></script>
+
+<script>
+
+  const forceKeyPressUppercase = (e) => {
+    let el = e.target;
+    let charInput = e.keyCode;
+    if((charInput >= 97) && (charInput <= 122)) { // lowercase
+      if(!e.ctrlKey && !e.metaKey && !e.altKey) { // no modifier key
+        let newChar = charInput - 32;
+        let start = el.selectionStart;
+        let end = el.selectionEnd;
+        el.value = el.value.substring(0, start) + String.fromCharCode(newChar) + el.value.substring(end);
+        el.setSelectionRange(start+1, start+1);
+        e.preventDefault();
+      }
+    }
+  };
+
+  document.querySelectorAll(".uc-text-smooth").forEach(function(current) {
+    current.addEventListener("keypress", forceKeyPressUppercase);
+  });
+
+</script>
+ <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="col-lg-12">
+          <div class="copyright-text" style=" text-align: center;">
+            <p style="color:black; "><b>Copyright © <b style="color:red; ">Northern Technik Pvt Ltd.</b> All Rights Reserved.</b>
+                  <brpricing-table-01.png><br>
+                      <b>Developed By:</b> <a href="#" target="_blank" title="#" style="color:blue; "><b>Imran Awan</b></a>
+        </p>
+          </div>
+        </div>
+            </footer>
+            <!-- End of Footer -->
+</body>
+</html>

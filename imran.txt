@@ -1,0 +1,39 @@
+ if request.method=='GET': # If the request is GET we return the Profile page and forms
+        now = datetime.now()
+        return render_template('profile.html',name=current_user.name,month=now.date())
+    else: # if the request is POST, then we check if the data doesn't already exist and then we save data
+        operator = request.form.get('operator')
+        station = request.form.get('station')
+        date = request.form.get('date')
+        acreg = request.form.get('acreg')
+        fltno = request.form.get('fltno')
+        actype = request.form.get('actype')
+        sector = request.form.get('sector')
+        sta = request.form.get('sta')
+        std = request.form.get('std')
+        ata = request.form.get('ata')
+        atd = request.form.get('atd')
+        aircraftcheck = request.form.get('aircraftcheck')
+        defect = request.form.get('defect')
+        rectification = request.form.get('rectification')
+        delay = request.form.get('delay')
+        engineer = request.form.get('engineer')
+        technician = request.form.get('technician')
+        comment = request.form.get('comment')
+        now = datetime.now()
+        month_name = now.strftime('%B')
+        year = now.year
+        month = f'{month_name} {year}'
+        user = Station.query.filter_by(data=date,fltno=fltno) # if this returns a user, then the email already exists in database
+        if user: # if a user is found, we want to redirect back to signup page so user can try again
+            flash('This Data or Record already exists')
+
+        # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+        new_user = Station(operator=operator, station=station,date=date,acreg=acreg,fltno=fltno,
+                           actype=actype,sector=sector,sta=sta,std=std,ata=ata,atd=atd,aircraftcheck=aircraftcheck,
+                           defect=defect,rectification=rectification,delay=delay,engineer=engineer,technician=technician,
+                           month=month,comment=comment) #//
+        # add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
+    return render_template('profile.html', name=current_user.name)
